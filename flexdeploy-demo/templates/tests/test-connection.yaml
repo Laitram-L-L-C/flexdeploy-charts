@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "{{ include "flexdeploy-demo.fullname" . }}-test-connection"
+  labels:
+{{ include "flexdeploy-demo.labels" . | indent 4 }}
+  annotations:
+    "helm.sh/hook": test-success
+spec:
+  containers:
+    - name: wget
+      image: busybox
+      command: ['wget']
+      args:  ['{{ include "flexdeploy-demo.fullname" . }}:{{ .Values.service.port }}']
+  restartPolicy: Never
