@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.deploymentName }}
+  labels:
+    name: {{ .Values.deploymentName }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Values.deploymentName }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.deploymentName }}
+    spec:
+      containers:
+        - image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          name: {{ .Chart.Name }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+          - name: FLEX_DB_URL
+            value: "{{ .Values.fd.db.url }}"
+          - name: FD_ADMIN_PWD
+            value: "{{ .Values.fd.db.password }}"
+          - name: TZ
+            value: "{{ .Values.fd.timezone }}"
+          - name: dbtype
+            value: "{{ .Values.fd.db.type }}"
+          resources:
+            requests:
+              cpu: ".25"
+              memory: "1900Mi"
+            limits:
+              cpu: ".5"
+              memory: "2500Mi"
+              ports:
+                - name: flexdeployport
+                  containerPort: 8080
