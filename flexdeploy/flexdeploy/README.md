@@ -1,4 +1,4 @@
-# flexdeploy-demo
+# flexdeploy
 
 Production Ready FlexDeploy application, provided by [Flexagon](https://flexagon.com).  This chart contains only the application. It is expected an external database be used and set via the FLEX_DB_URL property
 

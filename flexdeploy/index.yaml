@@ -3,9 +3,9 @@ entries:
   flexdeploy:
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2020-11-20T13:22:47.5451957-06:00"
+    created: "2020-11-20T15:31:01.2705583-06:00"
     description: FlexDeploy installation with external db provided by user
-    digest: f9dd52aa8a953b20d0dea24dfbd75a49fc8cac4cce7dd7bec55f7e0cab1a4c86
+    digest: 4f39af4091cb40e7cf2b58c14253819e31ec28ae16db3c6c37dc327c57d7b7aa
     name: flexdeploy
     urls:
     - https://flexagon.com/downloads/charts/flexdeploy/flexdeploy-1.0.0.tgz
@@ -13,11 +13,11 @@ entries:
   flexdeploy-demo:
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2020-11-20T13:22:47.546196-06:00"
+    created: "2020-11-20T15:31:01.2715571-06:00"
     description: A Helm chart for Kubernetes
     digest: dc0e5e5b03733abe2551b4ec88a3aef60a989100074658c7744aa521b9f31d97
     name: flexdeploy-demo
     urls:
     - https://flexagon.com/downloads/charts/flexdeploy/flexdeploy-demo-1.0.0.tgz
     version: 1.0.0
-generated: "2020-11-20T13:22:47.5441967-06:00"
+generated: "2020-11-20T15:31:01.2695579-06:00"

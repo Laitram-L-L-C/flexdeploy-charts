@@ -27,6 +27,9 @@ spec:
             value: "{{ .Values.fd.timezone }}"
           - name: dbtype
             value: "{{ .Values.fd.db.type }}"
+          ports:
+          - name: flexdeployport
+            containerPort: 8080
           resources:
             requests:
               cpu: ".25"
@@ -34,6 +37,4 @@ spec:
             limits:
               cpu: ".5"
               memory: "2500Mi"
-              ports:
-                - name: flexdeployport
-                  containerPort: 8080
+              
