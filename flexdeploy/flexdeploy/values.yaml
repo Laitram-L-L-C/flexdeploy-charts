@@ -5,6 +5,7 @@
 replicaCount: 1
 
 deploymentName: FlexDeploy
+volumeClaim:
 
 image:
   repository: docker.io/flexdeploy/fd_tcat

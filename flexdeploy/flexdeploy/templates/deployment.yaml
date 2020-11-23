@@ -37,4 +37,12 @@ spec:
             limits:
               cpu: ".5"
               memory: "2500Mi"
+          volumeMounts:
+          - mountPath: /home/oracle
+            name: {{ .Values.deploymentName }}volume
+      volumes:
+        - name: {{ .Values.deploymentName }}volume
+          persistentVolumeClaim:
+            claimName: {{ .Values.volumeClaim }}
+           
               
