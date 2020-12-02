@@ -33,10 +33,10 @@ spec:
           resources:
             requests:
               cpu: ".25"
-              memory: "1900Mi"
+              memory: "{{ .Values.fd.memory.initial }}"
             limits:
               cpu: ".5"
-              memory: "2500Mi"
+              memory: " .Values.fd.memory.limit "
           volumeMounts:
           - mountPath: /home/oracle
             name: {{ .Values.deploymentName }}volume

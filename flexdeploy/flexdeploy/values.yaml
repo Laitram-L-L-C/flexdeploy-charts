@@ -18,6 +18,9 @@ fd:
     url:
     password:
     type: 
+  memory:
+    initial: 1900Mi
+    limit: 3000Mi
 
 imagePullSecrets: []
 nameOverride: ""
