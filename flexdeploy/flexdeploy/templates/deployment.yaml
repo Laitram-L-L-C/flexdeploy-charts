@@ -36,7 +36,7 @@ spec:
               memory: "{{ .Values.fd.memory.initial }}"
             limits:
               cpu: ".5"
-              memory: " .Values.fd.memory.limit "
+              memory: "{{ .Values.fd.memory.limit }}"
           volumeMounts:
           - mountPath: /home/oracle
             name: {{ .Values.deploymentName }}volume
