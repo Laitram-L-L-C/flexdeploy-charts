@@ -54,7 +54,7 @@ spec:
                 operator: In
                 {{- with .Values.podAntiAffinity }}
                 values: 
-                  {{- toYaml . | nindent 18 }}
+                  {{- toYaml . | nindent 16 }}
                 {{- end }}
             topologyKey: "kubernetes.io/hostname"
       {{- end -}}
