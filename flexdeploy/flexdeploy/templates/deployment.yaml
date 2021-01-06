@@ -52,10 +52,10 @@ spec:
               matchExpressions:
               - key: environment
                 operator: In
+                {{- with .Values.podAntiAffinity }}
                 values: 
-                  {{- range $.Values.podAntiAffinity }}
-                  - {{ . | quote }}
-                  {{- end }}
+                  {{- toYaml . | nindent 18 }}
+                {{- end }}
             topologyKey: "kubernetes.io/hostname"
       {{- end -}}
      
