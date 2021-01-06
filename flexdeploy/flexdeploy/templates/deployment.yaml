@@ -52,8 +52,10 @@ spec:
               matchExpressions:
               - key: environment
                 operator: In
-                values:
-                - {{ .Values.podAntiAffinity }}
+                values: 
+                  {{- range $.Values.podAntiAffinity }}
+                  - {{ . | quote }}
+                  {{- end }}
             topologyKey: "kubernetes.io/hostname"
       {{- end -}}
      
