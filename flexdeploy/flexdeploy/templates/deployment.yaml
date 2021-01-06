@@ -44,5 +44,17 @@ spec:
         - name: {{ .Values.deploymentName }}volume
           persistentVolumeClaim:
             claimName: {{ .Values.volumeClaim }}
-           
+      {{- if .Values.podAntiAffinity -}}
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: environment
+                operator: In
+                values:
+                - {{ .Values.podAntiAffinity }}
+            topologyKey: "kubernetes.io/hostname"
+      {{- end -}}
+     
               
