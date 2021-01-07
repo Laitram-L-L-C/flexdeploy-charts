@@ -37,14 +37,18 @@ spec:
             limits:
               cpu: ".5"
               memory: "{{ .Values.fd.memory.limit }}"
+          {{- if .Values.volumeClaim -}}
           volumeMounts:
           - mountPath: /home/oracle
             name: {{ .Values.deploymentName }}volume
+          {{- end -}}
+      {{- if .Values.volumeClaim }}
       volumes:
         - name: {{ .Values.deploymentName }}volume
           persistentVolumeClaim:
             claimName: {{ .Values.volumeClaim }}
-      {{- if .Values.podAntiAffinity -}}
+      {{- end }}
+      {{- if .Values.podAntiAffinity }}
       affinity:
         podAntiAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
@@ -52,11 +56,11 @@ spec:
               matchExpressions:
               - key: environment
                 operator: In
-                {{- with .Values.podAntiAffinity }}
                 values: 
-                  {{- toYaml . | nindent 16 }}
+                {{- range .Values.podAntiAffinity }}
+                - {{ . }}
                 {{- end }}
             topologyKey: "kubernetes.io/hostname"
-      {{- end -}}
+      {{- end }}
      
               
