@@ -19,14 +19,17 @@ spec:
           name: {{ .Chart.Name }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
-          - name: FLEX_DB_URL
-            value: "{{ .Values.fd.db.url }}"
-          - name: FD_ADMIN_PWD
-            value: "{{ .Values.fd.db.password }}"
-          - name: TZ
-            value: "{{ .Values.fd.timezone }}"
-          - name: dbtype
-            value: "{{ .Values.fd.db.type }}"
+            {{- with .Values.extraEnv }}
+            {{- toYaml . | nindent 12 }}
+            {{- end }}
+            - name: FLEX_DB_URL
+              value: "{{ .Values.fd.db.url }}"
+            - name: FD_ADMIN_PWD
+              value: "{{ .Values.fd.db.password }}"
+            - name: TZ
+              value: "{{ .Values.fd.timezone }}"
+            - name: dbtype
+              value: "{{ .Values.fd.db.type }}"
           ports:
           - name: flexdeployport
             containerPort: 8080
