@@ -19,8 +19,8 @@ spec:
           name: {{ .Chart.Name }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
-            {{- with .Values.extraEnv }}
-            {{- toYaml . | nindent 12 }}
+            {{- if .Values.extraEnv }}
+            {{- toYaml .Values.extraEnv | nindent 12 }}
             {{- end }}
             - name: FLEX_DB_URL
               value: "{{ .Values.fd.db.url }}"
