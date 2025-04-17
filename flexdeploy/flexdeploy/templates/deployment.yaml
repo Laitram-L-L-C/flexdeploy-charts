@@ -5,6 +5,8 @@ metadata:
   labels:
     name: {{ .Values.deploymentName }}
 spec:
+  strategy:
+    type: Recreate
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
@@ -25,14 +27,17 @@ spec:
             - name: FLEX_DB_URL
               value: "{{ .Values.fd.db.url }}"
             - name: FD_ADMIN_PWD
-              value: "{{ .Values.fd.db.password }}"
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.fd.db.dbSecretName }}
+                  key: {{ .Values.fd.db.dbSecretKey }}
             - name: TZ
               value: "{{ .Values.fd.timezone }}"
             - name: dbtype
               value: "{{ .Values.fd.db.type }}"
           ports:
-          - name: flexdeployport
-            containerPort: 8080
+            - name: flexdeployport
+              containerPort: 8080
           resources:
             requests:
               cpu: ".25"
@@ -42,8 +47,8 @@ spec:
               memory: "{{ .Values.fd.memory.limit }}"
           {{- if .Values.volumeClaim }}
           volumeMounts:
-          - mountPath: /home/oracle
-            name: {{ .Values.deploymentName }}volume
+            - mountPath: /home/oracle
+              name: {{ .Values.deploymentName }}volume
           {{- end -}}
       {{- if .Values.volumeClaim }}
       volumes:
@@ -55,15 +60,13 @@ spec:
       affinity:
         podAntiAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
-          - labelSelector:
-              matchExpressions:
-              - key: environment
-                operator: In
-                values: 
-                {{- range .Values.podAntiAffinity }}
-                - {{ . }}
-                {{- end }}
-            topologyKey: "kubernetes.io/hostname"
+            - labelSelector:
+                matchExpressions:
+                  - key: environment
+                    operator: In
+                    values: 
+                      {{- range .Values.podAntiAffinity }}
+                      - {{ . }}
+                      {{- end }}
+              topologyKey: "kubernetes.io/hostname"
       {{- end }}
-     
-              

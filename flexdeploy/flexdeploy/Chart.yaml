@@ -2,4 +2,4 @@ apiVersion: v1
 appVersion: "1.0"
 description: FlexDeploy installation with external db provided by user
 name: flexdeploy
-version: 1.0.2
+version: 1.1.0
